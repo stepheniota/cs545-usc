@@ -1,0 +1,317 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LaTeX2e Template by Stephen Iota (iota@usc.edu) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+
+\include{header.tex}
+
+%\include{tikz}
+\usepackage{venndiagram}
+
+%%%%%%%%%%%%%
+%%% Begin %%%
+%%%%%%%%%%%%%
+\begin{document}
+
+    \begin{center}
+        {\LARGE \textsc{csci 545 Robotics:} \textbf{HW 1}}
+    \end{center}
+
+    \bigbreak
+
+    \begin{center}
+        Stephen Iota%\footnote{SID: \texttt{6862013543}}
+        \\
+        \email{iota@usc.edu}
+        \\
+        \texttt{SID:} \texttt{6862013543}
+        \\
+        \today
+    \end{center}
+
+    \bigbreak
+
+    \begin{problem}
+        Given the matrix $A = \colvec{3 & 1 \\ 1 & 2}$, find the eigenvalues and eigenvectors.
+    \end{problem}
+
+    \begin{solution}
+        First we solve for the eigenvalues $\lambda$ of $A$.
+        \begin{equation*}
+            \begin{gathered}
+                A\vb{v} = \lambda \vb{v} \\
+                (A - \lambda \eye) \vb{v} = 0 \\
+                \det{A - \lambda \eye} = 0 \\
+                \det{
+                    \colvec{3 - \lambda & 1 \\
+                            1 & 2 - \lambda}   
+                } = 0 \\
+                \lambda^2 - 5\lambda + 5 = 0 \\
+            \end{gathered}
+        \end{equation*}
+        \begin{equation}
+            \lambda = \frac{5 \pm \sqrt{5}} {2}
+        \end{equation}
+
+        Next, we solve for the first eigenvector $\vb{v}_1$, associated with eigenvalue $\lambda = (5 + \sqrt{5})/2$.
+        \begin{gather*}
+            A\vb{v} = \lambda \vb{v} \\
+            (A - \lambda \eye) \vb{v} = 0 \\ 
+            \colvec{3 - (5 + \sqrt{5})/2 & 1 \\ 1 & 2 - (5 + \sqrt{5})/2} \vb{v}_1 = \colvec{0 \\ 0}
+        \end{gather*}
+        Solve the corresponding system of equations for $(v_{1x}, v_{1y})$.
+        \begin{equation}
+            \begin{gathered}
+                \lambda_1 = (5 + \sqrt{5})/2 \\
+                \vb{v_1} = \colvec{\frac{1 + \sqrt{5}}{2} \\ 1}
+            \end{gathered}
+        \end{equation}
+        Now, repeat the same steps for $\lambda = (5 - \sqrt{5})/2$.
+        \begin{equation}
+            \begin{gathered}
+                \lambda_2 = (5 - \sqrt{5})/2 \\
+                \vb{v_2} = \colvec{-\frac{-1 + \sqrt{5}}{2} \\ 1}
+            \end{gathered}
+        \end{equation}
+    \end{solution}
+
+    \bigbreak
+    %\newpage
+    \begin{problem}
+        A matrix $A$ is called symmetric iff $\transpose{A} = A$ and skew-symmetric iff $\transpose{A} = -A$. Prove that
+        \begin{enumerate}[label=(\alph*)]
+            \item The sum of two symmetric matricies is a symmetric matrix. 
+            \item The sum of two skew-symmetric matricies is a skew-symmetric matrix. 
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        ~%%
+        \begin{enumerate}[label=(\alph*)]
+            \item Claim: For any two symmetric matricies $A, B$ of the same size, the sum $A + B$ is also a symmetric matrix.
+            \begin{proof}
+                Let $C$ be the sum $A + B$. 
+                Suppose by way of contradiction that $\transpose{C} \neq C$.
+                However,
+                \begin{align*}
+                    C &= A + B && \\
+                      &= \transpose{A} + \transpose{B} && A, B \text{ are symmetric}\\
+                      &= \transpose{(A + B)} && \text{transpose respects addition} \\
+                    C &= \transpose{C}
+                \end{align*}
+                The last result contradicts our initial assumption. Therefore, we've proved our claim.
+            \end{proof}
+
+            \item Claim: For any two skew-symmetric matricies $A, B$ of the same size, the sum $A + B$ is also a skew-symmetric matrix.
+            \begin{proof}
+                Let $C$ be the sum $A + B$. 
+                Suppose by way of contradiction that $\transpose{C} \neq -C$.
+                However, 
+                \begin{align*}
+                    C &= A + B \\
+                      &= (-\transpose{A}) + (-\transpose{B}) && A, B\text{ are skew-symmetric} \\
+                      &= -\transpose{(A + B)} \\
+                    C &= -\transpose{C}
+                \end{align*}
+                The last line contradicts the initial assumption. Therefore our claim holds.
+            \end{proof}
+        \end{enumerate}
+    \end{solution}
+
+
+    %\bigbreak
+    \newpage
+    \begin{problem}
+        Express each of the following events in terms of the events $A, B$ and $C$. 
+        \begin{enumerate}[label=(\alph*)]
+            \item at least one of the events $A, B, C$ occurs,
+            \item at most one of the events $A, B, C$ occurs, 
+            \item none of the events $A, B, C$ occurs,
+            \item all three events $A, B, C$ occur,
+            \item exactly one of the events $A, B, C$ occurs,
+            \item events $A$ and $B$ occur, but not $C$.
+        \end{enumerate}
+        Draw corresponding Venn diagrams. 
+    \end{problem}
+    
+    \begin{solution}
+        Let $Z$ denote the event described in parts (a) - (f), the shaded region in the figures. Let the sample space $\Omega$ be the bounding box.
+        \begin{enumerate}[label=(\alph*)]
+            \item At least one event occurs: 
+                \begin{equation}
+                    Z = A \union B \union C.
+                \end{equation}
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillA \fillB \fillC
+                    \end{venndiagram3sets}
+                \end{center}
+
+            \item At most one of the events occurs: 
+                \begin{equation} Z = \Big((A \intersect B) \union (B \intersect C) \union (A \intersect C)\Big)^c
+                    %Z = \compl{(A \union B \union C)} \union (A \union \compl{B} \union \compl{C}) \intersect (\compl{A} \union {B} \union \compl{C}) \intersect (\compl{A} \union \compl{B} \union {C})
+                \end{equation}
+
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillOnlyA \fillOnlyB \fillOnlyC \fillNotABC
+                    \end{venndiagram3sets}
+                \end{center}
+
+
+            \item none of the events occur:
+                \begin{equation}
+                    Z = \compl{A} \intersect \compl{B} \intersect \compl{C} = \compl{(A \union B \union C)}
+                \end{equation}
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillNotABC
+                    \end{venndiagram3sets}
+                \end{center}
+
+            \item all three events occur: 
+                \begin{equation}
+                    Z = A \intersect B \intersect C 
+                \end{equation}
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillACapBCapC
+                    \end{venndiagram3sets}
+                \end{center}
+
+            \item exactly one of the events occurs: 
+                \begin{equation}
+                    Z = (A \intersect \compl{B} \intersect \compl{C}) \union (B \intersect \compl{A} \intersect \compl{C}) \union (C \intersect \compl{A} \intersect \compl{B}).
+                \end{equation}
+
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillOnlyA \fillOnlyB \fillOnlyC
+                    \end{venndiagram3sets}
+                \end{center}
+
+            \item events $A, B$ occur, but not $C$: 
+                \begin{equation}
+                    Z = A \intersect B \intersect \compl{C}
+                \end{equation}
+
+                \begin{center}
+                    \begin{venndiagram3sets}
+                        \fillACapBNotC
+                    \end{venndiagram3sets}
+                \end{center}
+
+        \end{enumerate}
+    \end{solution}
+
+    \bigbreak
+
+    \begin{problem}
+        Give one example in robotics where the Markov assumption is used. Is the assumption valid or not? (Explain in no more than three sentences.)
+    \end{problem}
+
+    \begin{solution}
+        An example of the Markov assumption in robotics is state estimation. Predicting the current state of the robot is dependent only on its position, velocity and acceleration in its previous state.
+        This is a good assumption, given that the state is mostly fully observable to the robot, as dynamics is deterministic.
+    \end{solution}
+
+    \bigbreak
+    \begin{problem}
+        Give one example in the real world where the Markov assumption is used. Is the assumption valid or not?
+    \end{problem}
+    
+    \begin{solution}
+        In the real world, we can try to predict the daily weather using the Markov assumption. We can say that the probability of today being sunny depends on only the weather yesterday; whether yesterday was sunny or cloudy. This is a rather na\"ive assumption, as weather patterns can also depend on longer term effects such as the season
+    \end{solution}
+
+    \bigbreak
+    \begin{problem}
+        Determine the value of $\alpha$ such that
+        \begin{equation}
+            f_{\chi}(x) = \frac{\alpha}{e^x + e^{-x}}
+        \end{equation}
+        is a valid probability density function.
+    \end{problem}
+
+    \begin{solution}
+        For a pdf $f$ to be valid, we require 1) $f$ to be nonnegative across its range and 2) the integral of $f$ over its domain to evaluate to 1. 
+        
+        With $\alpha = 1$, $f \colon \R \to \set{y \in \R \colon 0 < y \leq 1/2}$. So we restrict our search to positive alpha values. Find $\alpha$ s.t. $\int_{-\infty}^{\infty} \dd x \frac{1}{e^{x} + e^{-x}} = 1/\alpha$. We know the indefinite integral is of the form
+        \begin{align*}
+            \int \dd x \frac{1}{e^{x} + e^{-x}} &= \arctan(e^x) + C.
+        \end{align*}
+        Evaluating $\arctan(e^x)$ at the bounds yields $\pi/2 - 0$. So we get our final answer.
+        \begin{equation}
+            \alpha = 2/\pi
+        \end{equation}
+
+    \end{solution}
+
+    \bigbreak
+    \begin{problem}
+        Two random vectors $\vb{x_1}$ and $\vb{x_2}$ are said to be uncorrelated if
+        \begin{equation}
+            P = E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \} = 0
+        \end{equation}
+        Show that
+        \begin{enumerate}[label=(\alph*)]
+            \item Independent random vectors are uncorrelated.
+            \item uncorrelated jointly Gaussian random vectors are Independent.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        ~%\\
+        \begin{enumerate}[label=(\alph*)]
+            \item Independent random vectors have a covariance of zero. The covariance of two vectors is defined as 
+            \begin{equation*}
+                \Cov(\vb{x}_1, \vb{x}_2) = E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \}.
+            \end{equation*}
+            We can rewrite this equation as follows.
+            \begin{align*}
+                \Cov(\vb{x}_1, \vb{x}_2) = E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \} &=
+                E \set{ \vb{x}_1 \vb{x}_2  - \vb{x}_1 E(\vb{x}_1) - \vb{x}_2 E(\vb{x}_1) - E(\vb{x}_1)E(\vb{x}_2) } \\
+                &= E(\vb{x}_1 \vb{x}_2) - E(\vb{x}_1)E(\vb{x}_2)
+            \end{align*}
+            For the covariance to be zero, we need to show
+            \begin{equation*}
+                 E(\vb{x}_1)E(\vb{x}_2) = E(\vb{x}_1 \vb{x}_2).
+            \end{equation*}
+            Expand out the $E(\vb{x}_1 \vb{x}_2)$ term, with the fact the two random variables are conditionally independent.
+            \begin{align*}
+                E(\vb{x}_1 \vb{x}_2) &= \sum_{x_i \in X_1} \sum_{x_j \in X_2} x_i y_i P(X_1 = x_i, X_2 = x_j) \\
+                &= \sum_{x_i, y_i} x_i y_i P(X_1 = x_i)P(X_j = x_j) \\
+                &= E(\vb{x}_1) E(\vb{x}_2)
+            \end{align*}
+        So finally, we have shown that if two random vectors are Independent of each other, then 
+        \begin{equation}
+            \begin{aligned}
+                \Cov(\vb{x}_1, \vb{x}_2) &= E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \}\\ &= E(\vb{x}_1 \vb{x}_2) - E(\vb{x}_1)E(\vb{x}_2)  \\
+                &= E(\vb{x}_1)E(\vb{x}_2) - E(\vb{x}_1)E(\vb{x}_2) = 0
+            \end{aligned}
+        \end{equation}
+
+        \item If $\vb{x}_1, \vb{x}_2$ are uncorrelated, the off-diagonals of their covariance matrix are zero: $E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \} = 0$.
+        We will use this fact to show the two jointly Gaussian random vectors are independent.
+
+        If two random (continuous) variables are independent, their joint pdfs can be written as a product of the individual pdfs; $f_{X_1, X_2}(x_1, x_2) = f_{X_1}(x_1)f_{X_2}(x_2)$. We will write one of the off-diagonals of the covariance matrix in terms of the pdf, then show they have this property. Let $g$ denote the Gaussian distribution.
+
+        \begin{align*}
+            E \{ (\vb{x}_1 - \bar{\vb{x}}_1) (\vb{x}_2 - \bar{\vb{x}}_2)^T \}
+            &= E(\vb{x}_1 \vb{x}_2) - E(\vb{x}_1)E(\vb{x}_2)  = 0 \\
+            E(\vb{x}_1 \vb{x}_2) &= E(\vb{x}_1)E(\vb{x}_2) \\
+            \iint_{X_1 X_2} \dd{x_1} \dd{x_2} x_1 x_2 \ g_{X_1 X_2}(x_1, x_2) &= 
+            \iint_{X_1 X_2} \dd{x_1} \dd{x_2} x_1 x_2 \ g_{X_1}(x_1) g_{X_2}(x_2)
+        \end{align*}
+        Take the derivative of both sides w.r.t $x_1, x_2$ and cancel out like terms on each side.
+        \begin{align}
+            g_{X_1, X_2}(x_1, x_2) &=  g_{X_1}(x_1) g_{X_2}(x_2)
+        \end{align}
+        So we've shown in order for the two jointly Gaussian random vectors to be uncorrelated, their probability density functions need to be independent of one another.
+        \end{enumerate}
+    \end{solution}
+
+\end{document}
+
