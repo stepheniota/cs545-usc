@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LaTeX2e Template by Stephen Iota (iota@usc.edu) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics}
+%\usepackage{algorithm}
+%\usepackage[noend]{algorithmic}
+\usepackage{mathtools}  % for boxed answers in align environments
+%\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}  % change labels in enum/item envs, [noitem[list]sep]
+%\usepackage[labelfont=bf,font=small]{caption}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[big]{titlesec}  % [small,medium,big]
+%\usepackage{fancyhdr}
+%\usepackage[noadjust]{cite}
+%\usepackage{tikz}
+\usepackage[colorlinks=true,
+            citecolor=NavyBlue!90!black,
+            linkcolor=green!50!black,
+            urlcolor=green!50!black,
+            hypertexnames=false]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%% MISC COMMANDS %%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\graphicspath{{./figures/}} % Setting the graphics path
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+\newcommand{\pref}[1]{[\ref{#1}]}
+
+%%%%%%%%%%%%%%%%%%%%
+%%% FRONT MATTER %%%
+%%%%%%%%%%%%%%%%%%%%
+\def\makemytitle{
+	\begin{center}
+        {\LARGE \textsc{\nclass}: \npset}%\textbf{\npset}}
+    \end{center}
+    \bigbreak
+    \begin{center}
+        \nauthor        \\
+        \email{\nemail} \\
+		\nthanks        \\
+        \ndate
+    \end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% My commands & environments %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{problem}{Problem}
+%\numberwithin{problem}{Problem}
+\theoremstyle{definition}
+%\swapnumbers % `2.1 Solution' instead of `Solution 2.1'
+\newtheorem*{solution}{Solution}
+%\numberwithin{solution}{solution}
+\newtheorem{question}{Problem}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%%%%%%%%%
+%% MISC %%
+%%%%%%%%%%
+\newcommand{\nextproblem}[0]{\bigbreak}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%% MATH COMMANDS %%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\transpose}[1]{\ensuremath{#1^T}}
+\newcommand{\colvec}[1]{\ensuremath{\begin{pmatrix} #1 \end{pmatrix}}}
+\newcommand{\eye}[0]{\ensuremath{\mathbb{I}}}
+\newcommand{\R}[0]{\ensuremath{\mathbb{R}}}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\set}[1]{\ensuremath{\{#1\}}}
+\newcommand{\compl}[1]{\ensuremath{#1^{c}}}
+\newcommand{\factorial}[1]{\ensuremath{#1!}}
+
+\DeclareMathOperator{\Cov}{Cov}
